@@ -44,6 +44,3 @@
 
 ## Extending the Agent
 Add new tools by decorating a function with `@tool` in `tools.py` and include it in the `tools` list when creating the agent.
-
----
-*Built by a Technical Lead with 20+ years of experience.*
