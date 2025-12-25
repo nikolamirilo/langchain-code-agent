@@ -1,0 +1,6 @@
+/docs
+/__pycache__
+/scripts
+/template
+/integrations
+/secrets.py
