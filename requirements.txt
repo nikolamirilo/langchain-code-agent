@@ -1,0 +1,6 @@
+langchain,
+rich,
+subprocess,
+shlex,
+pathlib,
+tavily
