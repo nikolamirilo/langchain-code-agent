@@ -31,30 +31,31 @@ agent = create_agent(
 
 messages = []
 
-try:
-    while True:
-        set_terminal_name("LangChain Agent")
-        question = input("You: ").strip()
-        if not question:
-            continue
+if __name__ == "__main__":
+    try:
+        while True:
+            set_terminal_name("LangChain Agent")
+            question = input("You: ").strip()
+            if not question:
+                continue
 
-        messages.append({"role": "user", "content": question})
+            messages.append({"role": "user", "content": question})
 
-        result = agent.invoke({
-            "messages": messages},
-             config={"callbacks": [handler]
-        })
+            result = agent.invoke({
+                "messages": messages},
+                 config={"callbacks": [handler]
+            })
 
-        # Extract last AI message
-        ai_message = next(
-            msg for msg in reversed(result["messages"])
-            if msg.type == "ai" and msg.content
-        )
+            # Extract last AI message
+            ai_message = next(
+                msg for msg in reversed(result["messages"])
+                if msg.type == "ai" and msg.content
+            )
 
-        console.print("\nAssistant:", Markdown(ai_message.content), "\n")
+            console.print("\nAssistant:", Markdown(ai_message.content), "\n")
 
-        # Persist conversation
-        messages.append({"role": "assistant", "content": ai_message.content})
+            # Persist conversation
+            messages.append({"role": "assistant", "content": ai_message.content})
 
-except KeyboardInterrupt:
-    print("\n\nExiting conversation. Goodbye 👋")
+    except KeyboardInterrupt:
+        print("\n\nExiting conversation. Goodbye 👋")

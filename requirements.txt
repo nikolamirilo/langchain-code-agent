@@ -3,3 +3,7 @@ rich
 tavily
 python-dotenv
 langchain_groq
+langserve[all]
+fastapi
+uvicorn
+sse_starlette
