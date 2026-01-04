@@ -6,8 +6,6 @@ from tools import browse_web, get_current_time, read_file, write_file, create_fo
 from utils import ToolLoggingHandler, set_terminal_name
 from dotenv import load_dotenv
 import os
-import os
-
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
