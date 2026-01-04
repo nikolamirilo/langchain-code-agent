@@ -4,11 +4,9 @@ from datetime import datetime
 from pathlib import Path
 import subprocess
 import shlex
-import http.client
-import json
-from secrets import VECTORIZE_API_KEY, TAVILIY_API_KEY
+import os
 
-
+TAVILIY_API_KEY = os.getenv("TAVILY_API_KEY")
 WORKDIR = Path("./").resolve()
 WORKDIR.mkdir(exist_ok=True)
 FORBIDDEN = ["sudo", "rm -rf", "&&", ";", "|", ">", "<"]
@@ -66,41 +64,6 @@ def browse_web(query: str) -> str:
 def get_current_time() -> str:
     """Get the current time."""
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-@tool 
-def searchVectors(query: str) -> str:
-    """Search a vector database for relevant information."""
-    # Placeholder implementation
-    conn = http.client.HTTPSConnection("api.vectorize.io")
-    payload = json.dumps({
-    "question": query,
-    "numResults": 3,
-    "rerank": True,
-    "metadata-filters": [
-        {}
-    ],
-    "context": {
-        "messages": [
-        {
-            "role": "string",
-            "content": "string"
-        }
-        ]
-    },
-    "advanced-query": {
-        "mode": "vector",
-        "match-type": "match",
-    }
-    })
-    headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer ' + VECTORIZE_API_KEY
-    }
-    conn.request("POST", "/v1/org/da410fd8-3465-4f53-804c-374d6b8c7d5a/pipelines/aip96917-704e-478c-a982-9d0ab53ae098/retrieval", payload, headers)
-    res = conn.getresponse()
-    data = res.read()
-    return data
 
 @tool
 def request_command_execution(command: str) -> str:

@@ -2,9 +2,16 @@ from langchain_groq import ChatGroq
 from langchain.agents import create_agent
 from rich.console import Console
 from rich.markdown import Markdown
-from tools import browse_web, get_current_time, read_file, write_file, create_folder, searchVectors, request_command_execution, execute_approved_command, print_tree
+from tools import browse_web, get_current_time, read_file, write_file, create_folder, request_command_execution, execute_approved_command, print_tree
 from utils import ToolLoggingHandler, set_terminal_name
-from secrets import GROQ_API_KEY
+from dotenv import load_dotenv
+import os
+import os
+
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
 
 console = Console()
 set_terminal_name("LangChain Agent")
@@ -15,12 +22,12 @@ print("Agent started. Press CTRL+C to exit.\n")
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
     temperature=0,
-    api_key=GROQ_API_KEY,
+    api_key=GROQ_API_KEY,#type:ignore
 )
 
 agent = create_agent(
     model=llm,                  
-    tools=[browse_web, get_current_time, read_file, write_file, create_folder, searchVectors, request_command_execution, execute_approved_command, print_tree],
+    tools=[browse_web, get_current_time, read_file, write_file, create_folder, request_command_execution, execute_approved_command, print_tree],
     system_prompt="You are an Technical Lead with more than 20 years of experience."
 )
 

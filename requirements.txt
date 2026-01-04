@@ -1,6 +1,5 @@
-langchain,
-rich,
-subprocess,
-shlex,
-pathlib,
+langchain
+rich
 tavily
+python-dotenv
+langchain_groq

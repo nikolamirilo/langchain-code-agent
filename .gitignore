@@ -4,3 +4,4 @@
 /template
 /integrations
 /secrets.py
+/.env
